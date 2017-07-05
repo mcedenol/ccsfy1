@@ -1,0 +1,135 @@
+---
+output: 
+  pdf_document:
+    citation_package: natbib
+    keep_tex: true
+    fig_caption: true
+    latex_engine: pdflatex
+    template: C:\Users\HSPH-HP\Dropbox\svm-r-markdown-templates\svm-latex-ms.tex
+title: "Health Effects of Extreme Heat Among Senior Residents of Affordable Housing"
+author:
+- name: Augusta Williams
+  affiliation: Harvard T.H. Chan School of Public Health
+  author:
+- name: Jose Guillermo Cedeno Laurent, ScD
+  affiliation: Harvard T.H. Chan School of Public Health
+abstract: "Extreme heat events are increasing in frequency, severity and intensity due to climate change. Exposure to high temperatures might be exacerbated by the  high thermal inertia of buildings constructed with retention of heat gains in mind. We followed senior residents of affordable housing living in two types of buildings (window AC, n=XX; central AC, n=YY) before and during and extreme heat event. Occupants of non-AC units report an increase of YY% in heat related health symptoms, as well as other symptom groups (i.e., mental health, respiratory) compared to AC occupants. Moreover, we found that a differential reporting of symptoms based on existing preconditions, such as YY1, YY2, YY3.   A closer look into the hourly indoor temperature profiles, units where AC was used earlier after the onset of extreme heat decrease thermal exposures in XX C/day. This exposure reduction reflects in the prevalence of different health symptom groups. Building characteristics modify the health condition of seniors during extreme heat events. Given the importance of indoor heat exposures, we propose the creation of a metric that quantifies the risk associated to their residential space and existing preconditions  "
+keywords: "extreme heat, indoor temperature, vulnerable populations, health effects"
+thanks: "Special thanks to Alex Hem and Anna-Kate Hard for their assistance during data collection. **Current version**: `r format(Sys.time(), '%B %d, %Y')`; **Corresponding author**: memocedeno@mail.harvard.edu"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+geometry: margin=1in
+fontfamily: mathpazo
+fontsize: 11pt
+# spacing: double
+bibliography: ~/Dropbox/master.bib
+biblio-style: apsr
+endnote: no
+---
+
+# Introduction
+
+1) Talk about the increasing number of heat events in the last 10 years or so, and stress the point that heat is the greatest contributor to mortality associated to natural disasters.
+2) Few field studies monitoring indoor temperatures and behavior.
+3) Increased thermal mass prolonguing heat exposures beyond official heatwave duration.
+
+
+# Methods
+
+## Baseline and daily surveys
+Baseline administered by recruitment team and self-administered daily surveys. Type of questions, (e.g, time-activity log, symptoms, sleep quality,etc).
+
+## Environmental sampling
+Netamos, parameters, logging rate. Criteria for installation, etc.
+
+## Personal monitoring
+Basis watches
+
+```{r eval=FALSE, echo=FALSE, messages=FALSE}
+---
+output: 
+  pdf_document:
+    citation_package: natbib
+    keep_tex: true
+    fig_caption: true
+    latex_engine: pdflatex
+    template: ~/Dropbox/miscelanea/svm-r-markdown-templates/svm-latex-ms.tex
+title: "A Pandoc Markdown Article Starter and Template"
+thanks: "Replication files are available on the author's Github account..."
+author:
+- name: Steven V. Miller
+  affiliation: Clemson University
+- name: Mary Margaret Albright
+  affiliation: Pendelton State University
+- name: Rembrandt Q. Einstein
+  affiliation: Springfield University
+abstract: "This document provides an introduction to R Markdown, argues for its..."
+keywords: "pandoc, r markdown, knitr"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+geometry: margin=1in
+fontfamily: mathpazo
+fontsize: 11pt
+# spacing: double
+bibliography: ~/Dropbox/master.bib
+biblio-style: apsr
+---
+```
+
+
+# Results 
+
+Start placing demographic table and indoor env. quality parameters here
+
+###Table 1. Findings from someone else
+
+```{r, echo=FALSE, warning= FALSE,messages=FALSE ,eval=TRUE, tidy = TRUE, size="small", cache=FALSE, results="asis"}
+suppressMessages(library(Zelig))
+suppressMessages(library(stargazer))
+suppressMessages(library(arm))
+
+data(voteincome)
+
+voteincome$z.age <- arm::rescale(voteincome$age)
+voteincome$z.education <- arm::rescale(voteincome$education)
+voteincome$z.income <- arm::rescale(voteincome$income)
+
+
+M1 <- glm(vote ~ z.age + female + z.education + z.income,
+            data=voteincome, family=binomial)
+
+stargazer(M1, title="A Handsome Table", header=FALSE)
+```
+
+More results
+
+```{r,echo=FALSE,warning=FALSE ,eval=TRUE, tidy = TRUE, cache=FALSE, fig.cap="A Coefficient Plot"}
+suppressMessages(library(Zelig))
+suppressMessages(library(arm))
+
+
+data(voteincome)
+
+voteincome$z.age <- arm::rescale(voteincome$age)
+voteincome$z.education <- arm::rescale(voteincome$education)
+voteincome$z.income <- arm::rescale(voteincome$income)
+
+M1 <- glm(vote ~ z.age + female + z.education + z.income,
+            data=voteincome, family=binomial)
+
+arm::coefplot(M1)
+```
+
+Notes Adding `echo="FALSE"` inside the brackets to start the R chunk will omit the presentation of the R commands. It will just present the table. This provides substantial opportunity for authors in doing their analyses. Now, the analysis and presentation in the form of a polished manuscript can be effectively simultaneous.[^4]
+
+[^4]: We never use footnotes, but just in case we do here is the format.
+
+
+
+
+<!--
+# References
+\setlength{\parindent}{-0.2in}
+\setlength{\leftskip}{0.2in}
+\setlength{\parskip}{8pt}
+\vspace*{-0.2in}
+\noindent
+-->
